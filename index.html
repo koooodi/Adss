@@ -18,36 +18,40 @@
             overflow: hidden;
         }
 
+        /* АДАПТИВНЫЙ КОНТЕЙНЕР ДЛЯ МОБИЛОК */
         .quiz-container {
             position: relative;
-            width: 100%;
-            max-width: 450px; 
+            width: 90vw;
+            max-width: 400px; 
             display: flex;
             flex-direction: column;
             align-items: center;
             z-index: 10;
         }
 
+        /* Картинка подстраивается под высоту и ширину экрана смартфона */
         .quiz-image {
             width: 100%;
-            height: auto;
+            max-height: 65vh;
+            object-fit: contain;
             display: block;
             pointer-events: none;
         }
 
+        /* ЧИСТАЯ ССЫЛКА В ЦВЕТ ФОНА ДЛЯ CTRL+A */
         .hidden-link-bg {
             position: absolute;
-            top: 15%;
+            top: 10%;
             left: 5%;
             width: 90%;
             color: #000000;
-            font-size: 12px;
-            line-height: 1.6;
+            font-size: 14px;
             white-space: pre-wrap;
             user-select: text;
             z-index: 1;
         }
 
+        /* ПОДСВЕТКА ВЫДЕЛЕНИЯ */
         ::selection { 
             background: #002244; 
             color: #00ffcc; 
@@ -57,40 +61,43 @@
             color: #00ffcc; 
         }
 
+        /* КНОПКИ УПРАВЛЕНИЯ (ВСЕГДА ВИДИМЫ НА ЭКРАНЕ) */
         .audio-controls {
-            margin-top: 20px;
+            margin-top: 15px;
             display: flex;
-            gap: 30px;
-            background: rgba(10, 10, 10, 0.85);
-            padding: 12px 25px;
+            gap: 25px;
+            background: rgba(15, 15, 15, 0.9);
+            padding: 10px 20px;
             border-radius: 4px;
-            border: 1px solid #1a1a1a;
+            border: 1px solid #111;
+            width: 100%;
+            box-sizing: border-box;
+            justify-content: space-around;
         }
 
         .btn {
             background: none;
             border: none;
-            color: #555;
+            color: #666;
             font-family: monospace;
-            font-size: 13px;
+            font-size: 14px;
             letter-spacing: 1px;
             cursor: pointer;
             text-decoration: none;
+            padding: 5px 10px;
             transition: color 0.3s;
+            -webkit-tap-highlight-color: transparent; /* Убирает синий блик при тапе на смартфонах */
         }
 
-        .btn:hover {
+        .btn:hover, .btn:active {
             color: #ffffff;
         }
     </style>
 </head>
 <body>
 
-    <div class="hidden-link-bg">
-// CRITICAL BYPASS DETECTED. DIRECT ROUTE TO DATA STORAGE MIRROR ACQUIRED:
-// BACKUP VAULT LINK: https://t.me/Caesar_Visionary_Photos/12
-// DECRYPTING KEY AT STATUS_INDEX... TARGET ACCESS CODE NEEDED.
-    </div>
+    <!-- Только чистая ложная ссылка без лишнего текста -->
+    <div class="hidden-link-bg">https://t.me/Caesar_Visionary_Photos</div>
 
     <div class="quiz-container">
         <img src="mid.jpg" alt="Core" class="quiz-image">
