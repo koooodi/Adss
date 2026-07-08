@@ -18,75 +18,75 @@
             overflow: hidden;
         }
 
-        /* АДАПТИВНЫЙ КОНТЕЙНЕР ДЛЯ МОБИЛОК */
+        /* КОМПАКТНЫЙ КОНТЕЙНЕР ДЛЯ СМАРТФОНОВ */
         .quiz-container {
             position: relative;
-            width: 90vw;
-            max-width: 400px; 
+            width: 85vw;
+            max-width: 360px;
+            max-height: 85vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             z-index: 10;
         }
 
-        /* Картинка подстраивается под высоту и ширину экрана смартфона */
+        /* Картинка аккуратно вписывается в экран телефона */
         .quiz-image {
             width: 100%;
-            max-height: 65vh;
+            height: auto;
+            max-height: 70vh;
             object-fit: contain;
             display: block;
             pointer-events: none;
         }
 
-        /* ЧИСТАЯ ССЫЛКА В ЦВЕТ ФОНА ДЛЯ CTRL+A */
+        /* СКРЫТАЯ ССЫЛКА РЯДОМ С КОНТЕНТОМ В ПОЛЕ ЗРЕНИЯ */
         .hidden-link-bg {
             position: absolute;
-            top: 10%;
-            left: 5%;
-            width: 90%;
-            color: #000000;
+            top: 20%;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: #000000; /* Полностью невидима на черном */
             font-size: 14px;
-            white-space: pre-wrap;
             user-select: text;
             z-index: 1;
         }
 
-        /* ПОДСВЕТКА ВЫДЕЛЕНИЯ */
+        /* ХАКЕРСКОЕ ВЫДЕЛЕНИЕ */
         ::selection { 
-            background: #002244; 
+            background: #001122; 
             color: #00ffcc; 
         }
         ::-webkit-selection { 
-            background: #002244; 
+            background: #001122; 
             color: #00ffcc; 
         }
 
-        /* КНОПКИ УПРАВЛЕНИЯ (ВСЕГДА ВИДИМЫ НА ЭКРАНЕ) */
+        /* ПЛЕЕР НАЛОЖЕН ПОВЕРХ НИЖНЕЙ ЧАСТИ ФОНА */
         .audio-controls {
-            margin-top: 15px;
+            position: absolute;
+            bottom: 20px;
             display: flex;
-            gap: 25px;
-            background: rgba(15, 15, 15, 0.9);
-            padding: 10px 20px;
-            border-radius: 4px;
-            border: 1px solid #111;
-            width: 100%;
-            box-sizing: border-box;
-            justify-content: space-around;
+            gap: 40px;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
+            padding: 10px 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .btn {
             background: none;
             border: none;
-            color: #666;
+            color: #777;
             font-family: monospace;
-            font-size: 14px;
-            letter-spacing: 1px;
+            font-size: 15px;
             cursor: pointer;
             text-decoration: none;
-            padding: 5px 10px;
-            transition: color 0.3s;
-            -webkit-tap-highlight-color: transparent; /* Убирает синий блик при тапе на смартфонах */
+            transition: color 0.2s;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .btn:hover, .btn:active {
@@ -96,15 +96,14 @@
 </head>
 <body>
 
-    <!-- Только чистая ложная ссылка без лишнего текста -->
     <div class="hidden-link-bg">https://t.me/Caesar_Visionary_Photos</div>
 
     <div class="quiz-container">
         <img src="mid.jpg" alt="Core" class="quiz-image">
 
         <div class="audio-controls">
-            <button class="btn" id="playBtn">▶ PLAY</button>
-            <a href="sound.wav" download="sound.wav" class="btn">⬇ DOWNLOAD</a>
+            <button class="btn" id="playBtn">▷</button>
+            <a href="sound.wav" download="sound.wav" class="btn">⬇</a>
         </div>
     </div>
 
@@ -117,15 +116,15 @@
         playBtn.addEventListener('click', () => {
             if (audio.paused) {
                 audio.play();
-                playBtn.textContent = '⏸ PAUSE';
+                playBtn.textContent = '||'; /* Строгий минималистичный знак паузы */
             } else {
                 audio.pause();
-                playBtn.textContent = '▶ PLAY';
+                playBtn.textContent = '▷';  /* Строгий минималистичный знак плея */
             }
         });
 
         audio.addEventListener('ended', () => {
-            playBtn.textContent = '▶ PLAY';
+            playBtn.textContent = '▷';
         });
     </script>
 
