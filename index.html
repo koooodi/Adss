@@ -10,7 +10,7 @@
             padding: 0;
             width: 100%;
             height: 100%;
-            background-color: #000000;
+            background-color: #000000; /* Черный фон на весь экран */
             font-family: monospace;
             display: flex;
             justify-content: center;
@@ -18,7 +18,7 @@
             overflow: hidden;
         }
 
-        /* ФОН НА ВЕСЬ ЭКРАН */
+        /* КОНТЕЙНЕР НА ВЕСЬ ЭКРАН */
         .quiz-container {
             position: relative;
             width: 100%;
@@ -26,31 +26,32 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 10;
         }
 
+        /* Картинка аккуратно вписывается и в ПК, и в мобилу без искажений */
         .quiz-image {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Полностью заполняет экран телефона */
+            object-fit: contain; 
             display: block;
             pointer-events: none;
         }
 
-        /* СКРЫТАЯ ССЫЛКА НА ТГК В ЦВЕТ ФОНА (Должна быть в поле зрения) */
+        /* СКРЫТАЯ ССЫЛКА (По центру рабочей зоны, поверх всего) */
         .hidden-link-bg {
             position: absolute;
-            bottom: 25%; /* Находится чуть выше плеера, прямо в поле зрения смартфона */
-            left: 0;
-            width: 100%;
+            top: 45%; 
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
             text-align: center;
             color: #000000; /* Абсолютно невидима на черном */
-            font-size: 14px;
+            font-size: 16px;
             user-select: text;
-            z-index: 1;
+            z-index: 15; /* Поверх картинки, чтобы точно копировалась */
         }
 
-        /* ХАКЕРСКАЯ ПОДСВЕТКА */
+        /* ПОДСВЕТКА ВЫДЕЛЕНИЯ */
         ::selection { 
             background: #002244; 
             color: #00ffcc; 
@@ -60,16 +61,17 @@
             color: #00ffcc; 
         }
 
-        /* ИНТЕРФЕЙС ПЛЕЕРА И КНОПКИ СКАЧАТЬ (СНИЗУ ПОВЕРХ ФОНА) */
+        /* ИНТЕРФЕЙС ПЛЕЕРА И СКАЧИВАНИЯ СНИЗУ */
         .audio-controls {
             position: absolute;
-            bottom: 10%; /* Четко снизу экрана телефона */
+            bottom: 8%; /* Строго снизу на любом экране */
             display: flex;
             gap: 30px;
             background: rgba(10, 10, 10, 0.85);
             padding: 12px 25px;
             border-radius: 4px;
             border: 1px solid #1a1a1a;
+            z-index: 20;
         }
 
         .btn {
