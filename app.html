@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Моё приложение</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  .bg {
+    height: 100vh;
+    width: 100vw;
+
+    /* === ЗДЕСЬ МЕНЯЕШЬ ФОТО ФОНА === */
+    /* Положи фото рядом с этим html файлом и укажи её имя ниже */
+    background-image: url('photo.jpg');
+    /* ================================ */
+
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    box-sizing: border-box;
+    padding-bottom: 40px;
+  }
+
+  .btn {
+    /* Красная 3D кнопка */
+    background: linear-gradient(180deg, #ff4b4b, #c40000);
+    border: none;
+    border-radius: 16px;
+    padding: 18px 50px;
+    font-size: 22px;
+    font-weight: bold;
+    color: black; /* === ЦВЕТ ТЕКСТА === */
+    cursor: pointer;
+
+    box-shadow:
+      0 8px 0 #7a0000,      /* объём снизу */
+      0 12px 15px rgba(0,0,0,0.4); /* тень */
+
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+  }
+
+  .btn:active {
+    transform: translateY(6px);
+    box-shadow:
+      0 2px 0 #7a0000,
+      0 4px 8px rgba(0,0,0,0.4);
+  }
+
+  /* === КАПЛЯ ВОДЫ === */
+  .drop {
+    position: fixed;
+    top: -20px;
+    width: 12px;
+    height: 16px;
+    /* === ЗДЕСЬ МЕНЯЕШЬ ЦВЕТ КАПЕЛЬ === */
+    background: #ffffff;
+    /* ================================= */
+    border-radius: 0 50% 50% 50%;
+    transform: rotate(45deg);
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 9999;
+    animation: fall linear forwards;
+  }
+
+  @keyframes fall {
+    to {
+      top: 100vh;
+      opacity: 0.2;
+    }
+  }
+
+  /* === СЕРДЕЧКО === */
+  .heart {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    font-size: 28px;
+    /* === ЗДЕСЬ МЕНЯЕШЬ ЦВЕТ СЕРДЕЧЕК === */
+    color: #ff2d55;
+    /* =================================== */
+    pointer-events: none;
+    z-index: 9999;
+    animation: floatUp 2s ease-in forwards;
+  }
+
+  @keyframes floatUp {
+    0% {
+      transform: translate(0, 0) scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(var(--drift), -300px) scale(1.4);
+      opacity: 0;
+    }
+  }
+
+  /* === СЧЁТЧИК КЛИКОВ === */
+  .counter {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px 18px;
+    border-radius: 12px;
+    z-index: 9999;
+  }
+</style>
+</head>
+<body>
+
+  <!-- === ВСТАВЬ ЭТУ СТРОЧКУ КУДА НУЖНО, ЧТОБЫ ПОКАЗАТЬ СЧЁТЧИК === -->
+  <div class="counter">ТРАХИ: <span id="clickCount">0</span></div>
+
+  <div class="bg">
+    <button class="btn" id="myBtn">
+      <!-- === ЗДЕСЬ МЕНЯЕШЬ ТЕКСТ КНОПКИ === -->
+      ТРАХНУТЬ
+      <!-- ================================== -->
+    </button>
+  </div>
+
+  <script>
+    const btn = document.getElementById('myBtn');
+
+    // === ВСТАВЬ ЭТОТ КУСОК, ЧТОБЫ СЧИТАТЬ КЛИКИ ===
+    let clicks = 0;
+    const clickCountEl = document.getElementById('clickCount');
+    // === КОНЕЦ КУСКА ===
+
+    btn.addEventListener('click', () => {
+      // === И ЭТУ СТРОЧКУ ВНУТРЬ ОБРАБОТЧИКА КЛИКА ===
+      clicks++;
+      clickCountEl.textContent = clicks;
+      // === КОНЕЦ ===
+
+      const dropsCount = 100; // сколько капель появляется за один клик
+
+      for (let i = 0; i < dropsCount; i++) {
+        const drop = document.createElement('div');
+        drop.className = 'drop';
+
+        // случайная позиция по горизонтали (по всему экрану)
+        drop.style.left = Math.random() * window.innerWidth + 'px';
+
+        // случайная скорость и задержка падения
+        const duration = 1 + Math.random() * 1.5;
+        drop.style.animationDuration = duration + 's';
+        drop.style.animationDelay = (Math.random() * 0.3) + 's';
+
+        document.body.appendChild(drop);
+
+        // удаляем каплю после анимации, чтобы не копились в памяти
+        setTimeout(() => drop.remove(), (duration + 0.5) * 1000);
+      }
+
+      // === ВСТАВЬ ЭТОТ КУСОК КУДА НУЖНО, ЧТОБЫ ПОЯВЛЯЛИСЬ СЕРДЕЧКИ СПРАВА ===
+      const heartsCount = 8; // сколько сердечек появляется за один клик
+
+      for (let i = 0; i < heartsCount; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.textContent = '❤';
+
+        heart.style.setProperty('--drift', (Math.random() * 80 - 40) + 'px'); // разлёт в стороны
+        heart.style.bottom = (20 + Math.random() * 40) + 'px'; // старт снизу справа
+        heart.style.animationDelay = (Math.random() * 0.3) + 's';
+
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 2500);
+      }
+      // === КОНЕЦ КУСКА ===
+    });
+  </script>
+
+</body>
+</html>
